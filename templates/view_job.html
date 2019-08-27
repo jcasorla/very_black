@@ -1,0 +1,56 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+
+        <div class=container>
+            <div class="row">
+                <div class="col-lg">
+                        <h1>Hello {{session['name']}}! These are the job details!</h1>                
+                        <hr>
+
+                </div>
+                <div class="col-sm-2">
+                    <a href="/show_jobs">Dashboard</a>
+                </div>
+                <div class="col-sm-2">
+                    <a href="/logout">logout</a>
+                </div>
+            </div>
+            <div class="col">
+                <h3>{{job['title']}}</h3>  
+                <div class="col align-self-center border border-dark">
+                                  
+                    <h3>{{job['description']}}</h3>
+                    <h3>location: {{job['location']}}</h3>
+                    <h3>Posted by: {{job['user_id']}}</h3>
+                    <h3>Posted On:  {{ job['created_at'] }}</h3>
+                    <h3>Category: ???</h3>
+                    <hr>
+    
+                </div>
+
+                {% if not liked %}
+                <a href="/jobs/{{job['id']}}/assign">Add</a>
+
+                {% else %}
+                <a href="/jobs/{{job['id']}}/assign/del">Giveup</a>
+                {% endif %}
+
+            </div>
+            
+    </div>
+        
+       
+    </body>
+
+
+
+</html>

@@ -1,0 +1,101 @@
+<!DOCTYPE HTML>
+
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    </head>
+    <body>
+        <div class=container>
+
+            <div class="row">
+
+                <div class="col-lg">
+                        <h1>Hello {{session['name']}}!</h1>                
+                        <hr>
+
+                </div>
+                <div class="col-sm-2">
+                    <a href="/logout">logout</a>
+                </div>
+                <div class="col-sm-3">
+                    <form action="/jobs/new" method="GET">
+                        <button type="submit" class="btn btn-danger">New Job</button>
+                        
+                    </form>                    
+
+                </div>
+                
+                
+            </div>
+                
+            <div class="row">
+                <div class="col-lg-8">
+                    <h3>Everyone's Jobs</h3>
+    
+                    <table class="table">  
+                        <tr><th>Job</th><th>location</th><th>Action</th></tr>  
+                                    
+                    {% for one_job in all_jobs %}
+                        
+                        {% if session['id']== one_job['user_id'] %}
+                        <tr><td>{{one_job["title"]}} </td><td>{{one_job["location"]}}</td>
+                        
+                        
+                        <td><a href="/jobs/{{one_job['id']}}">Show</a> | <a href="/jobs/{{one_job['id']}}/delete">remove</a> | <a href="/jobs/{{one_job['id']}}/edit">Edit</a> | <a href="/jobs/{{one_job['id']}}/assign">Add</a></td>
+                       
+                        </tr> 
+                        {% else %}
+                        <tr><td>{{one_job["title"]}} </td><td>{{one_job["location"]}}</td>
+                        
+                        
+                        <td><a href="/jobs/{{one_job['id']}}">Show</a> | <a href="/jobs/{{one_job['id']}}/assign">Add</a></td>
+
+                        {% endif %}
+        
+                    {% endfor %}
+                    </table>
+                    <hr>
+    
+                    
+                </div>
+                
+
+            </div>
+
+            <div class="row">
+                <div class="col-lg-8" >
+
+                    <h5>{{session['name']}} jobs</h5>
+                    <table class="table">  
+                        <tr><th>Job</th><th>Action</th></tr>  
+                                    
+                    {% for my_job in my_jobs %}
+                        
+                     
+                        <tr><td>{{my_job["title"]}} </td>
+                        
+                        
+                        <td><a href="/jobs/{{my_job['job_id']}}">Show</a> | <a href="/jobs/{{my_job['job_id']}}/assign/del">Giveup</a> | <a href="/jobs/{{my_job['job_id']}}/delete">Done</a></td>
+
+        
+                    {% endfor %}
+                    </table>
+                </div>
+                    
+            </div>
+
+            
+
+            
+    </div>
+        
+       
+    </body>
+
+
+
+</html>
